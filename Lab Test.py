@@ -1,60 +1,56 @@
-#I tried using a simple way of trying to count the number of words
-def word_count(user_input):
-    count = len(user_input.split)
-    return count
+# Spliting text into a list then counts each word in the list
+def word_count(text):
+    words = text.split()
+    return len(words)
 
-#I knew of the min and max so I tried to use them here since I was stuck on finding another way.
-def find_longest_word(user_input):
-    longest_word = " "
-    user_input.split()
-    longest_word = max(user_input, key=len)
+#After spliting the text using max will find the lorgest word based on length 
+def find_longest_word(text):
+    words = text.split()
+    longest_word = max(words, key=len)
     return longest_word
 
-#
-def count_substring(user_input, substring):
-    string = user_input
-    for l in string:
-        if l.isalnum():
+# Counts the occurrences a substring
+def count_substring(text, substring):
+    return text.count(substring)
 
-def extract_unique_words(user_input):
-    unique = user_input
-    user_input[0] = ""
-    return unique
-# I try using the same methods as I did in the past but it seem that it got too diffcult to sort.
+# First coverting the text into lowercase and spliting into words allows for the removal of any duplicates 
+def extract_unique_words(text):
+    words = text.lower().split()
+    unique_words = list(set(words))  # Set() is unchangeable but allows items to be added or remove 
+    return unique_words
+
+# Prompting the  user for input text
 def main():
-    print("Welcome to the test procesing program!")
-    user_input = str(input("Enter a text: "))
-    print("Orginal Text",str((user_input)))
+    print("Welcome to the Text Analysis Program!")
+    user_text = input("Enter a text: ")  
+    print(f"\nOriginal Text:\n{user_text}\n")
+    
+    # Using a while loop to ensure that menu keeps on asking to pick an option until ask the exit
     while True:
-        print("Text Analysis Option")
-        print("1. Word count")
-        print("2. Longest Word")
-        print("3. Count of Substring")
-        print("4. Unique Words")
+        print("Text Analysis Options:")
+        print("1. Word Count")
+        print("2. Longest word")
+        print("3. Count of substring")
+        print("4. Unique words")
         print("5. Exit")
-        print("Enter the number of the analysis option (1-5): ")
-        for x in range(4):
-            user_pick = int(input(print("Enter the number of the analysis option (1-5): ")))
-        if user_pick > 5 or user_pick < 1:
-            print("Invaid option. Please try again")
-        else:
-            break
-        if user_pick == 1:
-            count = word_count(user_input)
-            print(count)
-        elif user_pick == 2:
-            longest_word = find_longest_word(user_input)
-            print(longest_word)
-        elif user_pick == 3:
-            substring = count_substring(user_input)
-            print(substring)
-        elif user_pick == 4:
-            unique = extract_unique_words(user_input)
-            print(unique)
-        elif user_pick == 5:
-            print("Goodbye")
-            break
+        
+        choice = input("\nEnter the number of analysis option (1-5): ")
 
+        if choice == '1':
+            print(f"Word Count: {word_count(user_text)}\n")
+        elif choice == '2':
+            print(f"Longest Word: {find_longest_word(user_text)}\n")
+        elif choice == '3':
+            substring = input("Enter the substring to search for: ")
+            print(f"Count of substring '{substring}': {count_substring(user_text, substring)}\n")
+        elif choice == '4':
+            unique_words = extract_unique_words(user_text)
+            print(f"Unique Words: {unique_words}\n")
+        elif choice == '5':
+            print("Thank you for using the text processing program!")
+            break
+        else:
+            print("Please pick an option (1-5).")
 
 if __name__ == "__main__":
-main()
+    main()
